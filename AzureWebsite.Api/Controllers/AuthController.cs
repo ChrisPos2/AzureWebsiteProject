@@ -3,7 +3,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Microsoft.Extensions.Logging; // Dodaj tę linię
+
 
 namespace AzureWebsite.Api.Controllers
 {
@@ -12,9 +12,9 @@ namespace AzureWebsite.Api.Controllers
     public class AuthController : ControllerBase
     {
         private readonly JwtSettings jwtSettings;
-        private readonly ILogger<AuthController> logger; // Dodaj tę linię
+        private readonly ILogger<AuthController> logger; 
 
-        public AuthController(JwtSettings jwtSettings, ILogger<AuthController> logger) // Dodaj logger jako zależność
+        public AuthController(JwtSettings jwtSettings, ILogger<AuthController> logger) 
         {
             this.jwtSettings = jwtSettings;
             this.logger = logger; // Przypisz logger
@@ -23,7 +23,7 @@ namespace AzureWebsite.Api.Controllers
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginModel model)
         {
-            if (model.Username == "test" && model.Password == "password") // Replace with your user validation logic
+            if (model.Username == "test" && model.Password == "password") // prosta walidacja
             {
                 try
                 {
@@ -32,7 +32,7 @@ namespace AzureWebsite.Api.Controllers
                 }
                 catch (Exception ex)
                 {
-                    logger.LogError(ex, "Error generating token"); // Zaloguj wyjątek
+                    logger.LogError(ex, "Error generating token"); 
                     return StatusCode(500, $"Internal server error: {ex.Message}");
                 }
             }
